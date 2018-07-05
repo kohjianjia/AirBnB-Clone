@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   resource :session, controller: "clearance/sessions", only: [:create]
 
   # resources generate an id, in this case user's id
+  	# to override users,controller for users is changed from "clearance/users" to "users"
   resources :users, controller: "users", only: [:create, :edit, :update] do
 
   	# resource doesn't generate an id (password is just a column, not a table)
@@ -11,12 +12,18 @@ Rails.application.routes.draw do
       only: [:create, :edit, :update]
   end
 
-  # page with sign up form             #new is the method used
-  get "/sign_in" => "clearance/sessions#new", as: "sign_in"
-  delete "/sign_out" => "clearance/sessions#destroy", as: "sign_out"
-  get "/sign_up" => "clearance/users#new", as: "sign_up"
-
   	# leads to views => welcome => index
 	root 'welcome#index'
+
+  	# page with sign up form             #new is the method used
+  	get "/sign_in" => "clearance/sessions#new", as: "sign_in"
+  	delete "/sign_out" => "clearance/sessions#destroy", as: "sign_out"
+  	get "/sign_up" => "clearance/users#new", as: "sign_up"
+
+	# user clicked on form -> google, users will get redirected back
+	get "/auth/:provider/callback" => "sessions#create_from_omniauth"
+
+
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
+
