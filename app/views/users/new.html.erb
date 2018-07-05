@@ -4,6 +4,8 @@
   <h2><%= t(".title") %></h2>
 
   <%= form_for @user do |form| %>
+    <!-- _ means its a partial -->
+      <!-- so this file connects with _form.html.erb -->
     <%= render partial: '/users/form', object: form %>
 
     <div class="submit-field">

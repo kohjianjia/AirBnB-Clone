@@ -64,5 +64,8 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 # Rails authentication with email & password. Read more: https://github.com/thoughtbot/clearance
 gem "clearance"
 
-# To ensure that all secrets are not exposed
+# Strategy to authenticate with Google via OAuth2 in OmniAuth
+gem 'omniauth-google-oauth2'
+
+# To ensure that all secrets (keys) are not exposed
 gem "figaro"
