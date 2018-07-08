@@ -1,17 +1,26 @@
 class User < ApplicationRecord
-  include Clearance::User
+
+	include Clearance::User
 	has_many :authentications, dependent: :destroy
 
+	has_many :listings
+
+	#              0          1           2
+	enum role: [:customer, :moderator, :superadmin]
+
 	# auth_hash returns requested info in a hash
-		# password cannot 
 	def self.create_with_auth_and_hash(authentication, auth_hash)
 		# byebug
 	   user = self.create!(
+	   	# these info are required from a hash from google
 	    name: auth_hash["info"]["name"],
 	    email: auth_hash["info"]["email"],
+	    # password cannot be nil (specified previously)
 	    password: SecureRandom.hex(10),
 	    gender: auth_hash["info"]["gender"]
 	   )
+
+	   # helper method that pushes am authentication object into an existing user
 	   user.authentications << authentication
 	   return user
 	 end

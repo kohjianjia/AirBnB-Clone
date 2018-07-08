@@ -7,6 +7,7 @@ class UsersController < Clearance::UsersController
 
 	def create
 		user = User.new(user_params)
+		# byebug
 		user.save
 		redirect_to sign_in_path
 	end

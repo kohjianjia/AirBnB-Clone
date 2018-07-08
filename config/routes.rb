@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
+  get 'listing/index'
+  get 'homepage/index'
   resources :passwords, controller: "clearance/passwords", only: [:create, :new]
-  resource :session, controller: "clearance/sessions", only: [:create]
+  resource :session, controller: "sessions", only: [:create]
 
   # resources generate an id, in this case user's id
   	# to override users,controller for users is changed from "clearance/users" to "users"
@@ -23,6 +25,12 @@ Rails.application.routes.draw do
 	# user clicked on form -> google, users will get redirected back
 	get "/auth/:provider/callback" => "sessions#create_from_omniauth"
 
+	# homepage
+	get "/homepage" => "homepage#index"
+
+	# listing page
+	get "/listing" => "listing#index"
+	post "/listing/index" => "listing#create"
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

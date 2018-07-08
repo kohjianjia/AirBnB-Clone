@@ -1,0 +1,27 @@
+<h1>Explore Airbnb</h1>
+
+<%= link_to "Add Listing", "/listing" %> 
+
+<hr />
+
+<div>
+	<h2>Homes around the world</h2>
+</div>
+
+<%= page_entries_info @listings %><br/>
+<%= paginate @listings, outer_window: 3 %><br/>
+
+<% @listings.each do |listing| %>
+		<a href=""><%= listing.title %></a> 
+		<br />
+		<%= listing.pricing %>,
+		<%= listing.city %><br />
+		<br />
+<% end %>
+
+<%= paginate @listings, outer_window: 3 %>
+
+
+
+
+
