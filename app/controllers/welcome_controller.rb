@@ -1,4 +1,4 @@
-# Homepage
+# Airbnb main page
 
 class WelcomeController < ApplicationController
 	def index

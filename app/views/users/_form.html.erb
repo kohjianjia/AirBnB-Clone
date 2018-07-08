@@ -15,7 +15,14 @@
   <%= form.text_field :name, type: 'name' %>
 </div>
 
-<div class="text-field">
-  <%= form.label :gender %>
-  <%= form.text_field :gender, type: 'gender' %>
+<div>
+  <%= form.label :gender %><br />
+  Male
+  <%= form.radio_button :gender, "male" %>
+  Female
+  <%= form.radio_button :gender, "female" %>
+  Other
+  <%= form.radio_button :gender, "other" %>
 </div>
+
+

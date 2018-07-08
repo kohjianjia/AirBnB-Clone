@@ -69,3 +69,9 @@ gem 'omniauth-google-oauth2'
 
 # To ensure that all secrets (keys) are not exposed
 gem "figaro"
+
+# generates fake data
+gem 'faker', :git => 'https://github.com/stympy/faker.git', :branch => 'master'
+
+# pagination helper
+gem 'kaminari'

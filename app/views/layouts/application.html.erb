@@ -7,6 +7,7 @@
 <body>
   <div id="header">
     <% if signed_in? -%>
+      <%= link_to "Airbnb", "/homepage" %>
       <%= button_to t(".sign_out"), sign_out_path, method: :delete %> <br/>
       Signed in as: <%= current_user.email %>
     <% else -%>
