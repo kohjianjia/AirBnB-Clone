@@ -1,9 +1,10 @@
 class User < ApplicationRecord
 
 	include Clearance::User
+	#                          if user is deleted, everything related to the user will be deleted as well
 	has_many :authentications, dependent: :destroy
 
-	has_many :listings
+	has_many :listings, dependent: :destroy
 
 	#              0          1           2
 	enum role: [:customer, :moderator, :superadmin]

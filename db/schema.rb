@@ -39,7 +39,7 @@ ActiveRecord::Schema.define(version: 2018_07_08_153000) do
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.boolean "verification"
+    t.boolean "verification", default: false
     t.index ["user_id"], name: "index_listings_on_user_id"
   end
 
