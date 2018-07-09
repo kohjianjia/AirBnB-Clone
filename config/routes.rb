@@ -6,7 +6,9 @@ Rails.application.routes.draw do
 
   # resources generate an id, in this case user's id
   	# to override users,controller for users is changed from "clearance/users" to "users"
-  resources :users, controller: "users", only: [:create, :edit, :update] do
+  resources :users, controller: "users", only: [:create, :edit, :update, :show, :index] do
+	# get "/users" => "users#index"
+	# get "/users/:id" => "users#show"
 
   	# resource doesn't generate an id (password is just a column, not a table)
     resource :password,
@@ -29,8 +31,13 @@ Rails.application.routes.draw do
 	get "/homepage" => "homepage#index"
 
 	# listing page
-	get "/listing" => "listing#index"
-	post "/listing/index" => "listing#create"
+	resources :listings
+	# get "/listing" => "listing#index"
+	# post "/listing/index" => "listing#create"
+	# get "/listing/:id" => "listing#show"
+	# get "/listing/:id/edit" => "listing#show#edit"
+
+	patch "/listings/:id/verify" => "listings#verify", as: "verify"
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

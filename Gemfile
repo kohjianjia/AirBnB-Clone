@@ -75,3 +75,6 @@ gem 'faker', :git => 'https://github.com/stympy/faker.git', :branch => 'master'
 
 # pagination helper
 gem 'kaminari'
+
+# provides a simple and extremely flexible way to upload files from Ruby applications
+gem 'carrierwave', '~> 1.0'

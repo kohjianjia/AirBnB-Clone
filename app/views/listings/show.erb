@@ -1,0 +1,30 @@
+<h1><%= @listing.title %></h1>
+
+<h3>in <%= @listing.city %></h3>
+
+<h4>Owner: <a href="/users/<%= @listing.user.id %>"><%= @listing.user.name %></a></h4>
+
+<h3>$<%= @listing.pricing %> per night </h3>
+
+<h3>Summary: <%= @listing.summary %></h3>
+
+<h4><%= @listing.guest_number %> guests | <%= @listing.home_type %> | <%= @listing.room_type %></h4>
+
+<h4>Description: <%= @listing.description %></h4>
+
+<h4>Amenities: </h4>
+	<% @listing.amenity.each do |a| %>
+	<li><%= a %></li>
+<% end %>
+<br/>
+
+Listing Status: <%= @listing.verification %><br/>
+
+<% if current_user.superadmin? || current_user.moderator? %>
+	<% if !@listing.verification %>
+		<%= link_to 'verify this listing', verify_path(@listing), method: :patch %>
+	<% else %>
+		<%= link_to 'unverify', verify_path(@listing), method: :patch %>
+	<% end %>
+<% end %>
+

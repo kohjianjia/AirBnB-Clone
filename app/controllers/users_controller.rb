@@ -1,5 +1,9 @@
 class UsersController < Clearance::UsersController
 
+	def index
+		@users = User.all
+	end
+
 	# acquire from users => new.html.erb
 	def new
 		@user = User.new
@@ -10,6 +14,11 @@ class UsersController < Clearance::UsersController
 		# byebug
 		user.save
 		redirect_to sign_in_path
+	end
+
+	def show
+    	@user = User.find(params[:id])
+    	@listing = Listing.find(params[:id])
 	end
 
 	private
@@ -38,7 +47,7 @@ class UsersController < Clearance::UsersController
 
 	def user_params
   	  # params will require a user key, and user key will require the 5 keys
-      params.require(:user).permit(:email, :password, :name, :gender, :age)
+      params.require(:user).permit(:email, :password, :name, :gender)
     end
 
 end

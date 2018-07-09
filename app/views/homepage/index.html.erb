@@ -2,6 +2,21 @@
 
 <%= link_to "Add Listing", "/listing" %> 
 
+<% if signed_in? %>
+	<% case current_user.role %>
+	<% when 'customer' %>
+		<h3>Welcome</h3>	
+	<% when 'moderator' %>
+		<h3>Welcome, moderator</h3>
+		<h4><%= link_to 'Users:', users_path %> <%= User.count %> registered</h4>
+	<% when 'superadmin' %>
+		<h3>Welcome, Administrator</h3>
+		<h4><%= link_to 'Users:', users_path %> <%= User.count %> registered</h4>
+	<% end %>
+<% else %>
+	<h3>Welcome</h3>
+<% end %>
+
 <hr />
 
 <div>
@@ -9,17 +24,17 @@
 </div>
 
 <%= page_entries_info @listings %><br/>
-<%= paginate @listings, outer_window: 3 %><br/>
+<%= paginate @listings %><br/>
 
 <% @listings.each do |listing| %>
-		<a href=""><%= listing.title %></a> 
-		<br />
-		<%= listing.pricing %>,
-		<%= listing.city %><br />
-		<br />
+	<%= listing.room_type %> | <%= listing.city %><br />
+	<a href="/listings/<%= listing.id %>"><%= listing.title %></a> 
+	<br />
+	$<%= listing.pricing %> per night<br />
+	<br />
 <% end %>
 
-<%= paginate @listings, outer_window: 3 %>
+<%= paginate @listings %>
 
 
 

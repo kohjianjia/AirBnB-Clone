@@ -17,7 +17,7 @@ ActiveRecord::Base.transaction do
   20.times do 
     user['name'] = Faker::Name.name 
     user['email'] = Faker::Internet.email
-    user['gender'] = rand(1..2)
+    user['gender'] = ["male", "female", "other"].sample
 
     User.create(user)
   end

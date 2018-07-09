@@ -1,6 +1,6 @@
 <h2>Add listing</h2>
 
-<%= form_with scope: :listing, local: true do |form| %>
+<%= form_with scope: @listing, url: listings_path, local: true do |form| %>
   <p>
     <%= form.label :title %><br>
     <%= form.text_field :title %>

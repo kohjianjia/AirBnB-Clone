@@ -1,0 +1,8 @@
+<% i = 1 %>
+<% @users.order("id").each do |user| %>
+	<h4>
+		<%= i.to_s %>. 
+		<a href="/users/<%= user.id %>"><%= user.name %></a>
+	</h4>
+	<% i += 1 %>
+<% end %>
