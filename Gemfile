@@ -27,6 +27,9 @@ gem 'jbuilder', '~> 2.5'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
+# enable terminal to have a better view
+gem 'pry-rails', '~> 0.3.4'
+
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 
@@ -78,3 +81,10 @@ gem 'kaminari'
 
 # provides a simple and extremely flexible way to upload files from Ruby applications
 gem 'carrierwave', '~> 1.0'
+
+gem "mini_magick"
+
+gem 'fog-aws'
+
+# datepicker
+

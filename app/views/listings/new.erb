@@ -105,6 +105,11 @@
   </p>
 
   <p>
+    <%= form.label :images %><br>
+    <%= form.file_field :images, multiple: true %>
+  </p>
+
+  <p>
     <%= form.submit %>
   </p>
 <% end %>

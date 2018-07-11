@@ -14,7 +14,7 @@ class ListingsController < ApplicationController
   end
 
   def show
-    @user = User.find(1)
+    # @reservation = Reservation.new
   end
 
   def create
@@ -26,7 +26,8 @@ class ListingsController < ApplicationController
       flash[:listing_saved] = "Successfully created listing."
   	  redirect_to homepage_index_path
     else
-      redirect_back
+      redirect_back(fallback_location: homepage_path)
+      # redirect_to :back 
     end
   end
 
@@ -53,7 +54,7 @@ class ListingsController < ApplicationController
 
   def listing_params
     # strong params
-  	params.require(:listing).permit(:title, :city, :address, :summary, :description, :home_type, :room_type, :guest_number, :pricing, :user_id, :amenity => [])
+  	params.require(:listing).permit(:title, :city, :address, :summary, :description, :home_type, :room_type, :guest_number, :pricing, :user_id, {images: []}, :amenity => [])
   end
 
   def check_update_rights

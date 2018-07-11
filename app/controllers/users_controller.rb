@@ -18,7 +18,11 @@ class UsersController < Clearance::UsersController
 
 	def show
     	@user = User.find(params[:id])
-    	@listing = Listing.find(params[:id])
+    	@reservation = Reservation.find(params[:id])
+	end
+
+	def edit
+		@user = User.find(params[:id])
 	end
 
 	private
@@ -47,7 +51,7 @@ class UsersController < Clearance::UsersController
 
 	def user_params
   	  # params will require a user key, and user key will require the 5 keys
-      params.require(:user).permit(:email, :password, :name, :gender)
+      params.require(:user).permit(:email, :password, :name, :gender, :image)
     end
 
 end
