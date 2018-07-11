@@ -30,12 +30,18 @@ Rails.application.routes.draw do
 	# homepage
 	get "/homepage" => "homepage#index"
 
-	# listing page
-	resources :listings
+	# nested routes
+	resources :listings do
+    resources :reservations
+  end
+	# replaces:
 	# get "/listing" => "listing#index"
 	# post "/listing/index" => "listing#create"
 	# get "/listing/:id" => "listing#show"
 	# get "/listing/:id/edit" => "listing#show#edit"
+
+  #reservation
+  # resources :reservations, only: [:index]
 
 	patch "/listings/:id/verify" => "listings#verify", as: "verify"
 

@@ -1,6 +1,6 @@
 <h1>Explore Airbnb</h1>
 
-<%= link_to "Add Listing", "/listing" %> 
+<%= link_to "Add Listing", new_listing_path %> 
 
 <% if signed_in? %>
 	<% case current_user.role %>
@@ -27,7 +27,10 @@
 <%= paginate @listings %><br/>
 
 <% @listings.each do |listing| %>
-	<%= listing.room_type %> | <%= listing.city %><br />
+	<% if listing.images != [] %>
+		<%= image_tag listing.images[0].thumb.url %><br />
+	<% end %>
+	<%= listing.room_type %> • <%= listing.city %><br />
 	<a href="/listings/<%= listing.id %>"><%= listing.title %></a> 
 	<br />
 	$<%= listing.pricing %> per night<br />
@@ -35,8 +38,6 @@
 <% end %>
 
 <%= paginate @listings %>
-
-
 
 
 

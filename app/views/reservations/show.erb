@@ -1,0 +1,13 @@
+<h4>Your upcoming trip!</h4>
+
+<h3><%= @reservation.listing.city %></h3>
+
+<h5><%= @reservation.start_date %> to <%= @reservation.end_date %> • <%= @reservation.listing.guest_number %> guests</h5>
+
+<h4><%= @reservation.listing.title %></h4>
+
+<h4>Total:
+	<%= @reservation.total_price %>
+</h4>
+
+<h5>Special request: <%= @reservation.special_request %></h5>

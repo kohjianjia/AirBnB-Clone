@@ -1,6 +1,7 @@
 <% if signed_in? %>
 	<% case current_user.role %>
 	<% when 'customer' %>
+		<%= image_tag @user.image.thumb.url.to_s %>
 		<h3>Name: <%= @user.name %></h3>
 		<hr/>
 		<h3>Listings of <%= @user.name %></h3>
@@ -14,6 +15,7 @@
 		<% end %>
 	<% when 'moderator' %>
 		<h3>User ID: <%= @user.id %></h3>
+		<%= image_tag @user.image.thumb.url.to_s %>
 		<h3>Name: <%= @user.name %></h3>
 		<h3>Status: <%= @user.role %></h3>
 		<hr/>
@@ -29,18 +31,29 @@
 		<% end %>
 	<% when 'superadmin' %>
 		<h3>User ID: <%= @user.id %></h3>
+		<%= image_tag @user.image.thumb.url.to_s %>
 		<h3>Name: <%= @user.name %></h3>
 		<h3>Status: <%= @user.role %></h3>
 		<h4><%= @user.inspect %></h4>
+		<a href="/users/<%= @user.id %>/edit">EDIT</a>
 		<hr/>
 		<h3>Listings of <%= @user.name %></h3>
 		<% i = 1 %>
 		<% @user.listings.each do |listing| %>
-			<h4>
+			<h5>
 				<%= i.to_s %>. 
 				<a href="/listings/<%= listing.id %>"><%= listing.title %></a>
 				<button>Verify</button>
-			</h4>
+			</h5>
+			<% i += 1 %>
+		<% end %>
+		<hr/>
+		<h3>Reservations of <%= @user.name %></h3>
+		<% i = 1 %>
+		<% @user.reservations.each do |reservation| %>
+			<h5>
+				<%= i.to_s %>. <%= reservation.listing.city %>, from <%= reservation.start_date %> to <%= reservation.end_date %>
+			</h5>
 			<% i += 1 %>
 		<% end %>
 	<% end %>

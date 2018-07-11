@@ -3,11 +3,13 @@ class User < ApplicationRecord
 	include Clearance::User
 	#                          if user is deleted, everything related to the user will be deleted as well
 	has_many :authentications, dependent: :destroy
-
 	has_many :listings, dependent: :destroy
+	has_many :reservations, dependent: :destroy
 
 	#              0          1           2
 	enum role: [:customer, :moderator, :superadmin]
+
+	mount_uploader :image, ImageUploader
 
 	# auth_hash returns requested info in a hash
 	def self.create_with_auth_and_hash(authentication, auth_hash)

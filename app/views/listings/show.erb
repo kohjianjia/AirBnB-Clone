@@ -1,22 +1,12 @@
+<% @listing.images.each do |image| %>
+	<%= image_tag image.thumb.url %>
+	<br/>
+<% end %>
+
+
 <h1><%= @listing.title %></h1>
 
-<h3>in <%= @listing.city %></h3>
-
-<h4>Owner: <a href="/users/<%= @listing.user.id %>"><%= @listing.user.name %></a></h4>
-
-<h3>$<%= @listing.pricing %> per night </h3>
-
-<h3>Summary: <%= @listing.summary %></h3>
-
-<h4><%= @listing.guest_number %> guests | <%= @listing.home_type %> | <%= @listing.room_type %></h4>
-
-<h4>Description: <%= @listing.description %></h4>
-
-<h4>Amenities: </h4>
-	<% @listing.amenity.each do |a| %>
-	<li><%= a %></li>
-<% end %>
-<br/>
+<h3>in <a href=""><%= @listing.city %></a></h3>
 
 Listing Status: <%= @listing.verification %><br/>
 
@@ -27,4 +17,57 @@ Listing Status: <%= @listing.verification %><br/>
 		<%= link_to 'unverify', verify_path(@listing), method: :patch %>
 	<% end %>
 <% end %>
+
+<h4>Owner: <a href="/users/<%= @listing.user.id %>"><%= @listing.user.name %></a></h4>
+
+<h3>Summary: <%= @listing.summary %></h3>
+
+<h4><%= @listing.guest_number %> guests | <%= @listing.home_type %> | <%= @listing.room_type %></h4>
+
+<h4>Description: <%= @listing.description %></h4>
+
+<h4>Amenities: </h4>
+	<% @listing.amenity.each do |a| %>
+		<li><%= a %></li>
+	<% end %>
+<hr/>
+
+<h3>$<%= @listing.pricing %> per night </h3>
+
+<h3>Dates</h3>
+
+<%= form_with scope: :reservation, url: listing_reservations_path(@listing), local: true do |form| %>
+
+  <p>
+    <%= form.label :check_in %><br>
+    <%= form.text_field :start_date, id: "datepicker1", width: 276 %>
+  </p>
+
+  <p>
+    <%= form.label :check_out %><br>
+    <%= form.text_field :end_date, id: "datepicker2", width: 276  %>
+  </p>
+
+  <p>
+    <%= form.label :special_request %><br>
+    <%= form.text_field :special_request %>
+  </p>
+
+  <p>
+    <%= form.submit %>
+  </p>
+
+<% end %>
+
+<script>
+        $('#datepicker1').datepicker({
+        	format: 'dd/mm/yyyy',
+            uiLibrary: 'bootstrap4'
+        });
+
+        $('#datepicker2').datepicker({
+        	format: 'dd/mm/yyyy',
+            uiLibrary: 'bootstrap4'
+        });
+</script>
 
