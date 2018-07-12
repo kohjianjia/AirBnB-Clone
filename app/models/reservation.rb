@@ -29,6 +29,7 @@ class Reservation < ApplicationRecord
 	# Check if a given reservation overlaps this interval
 	def overlapping_reservations
 		# byebug
+		# =? prevents sql injection
 		Reservation.where("listing_id =?", self.listing_id).each do |r|
 			if overlaps?(r)
 				return errors.add(:unavailable, "dates!")

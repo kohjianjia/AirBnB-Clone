@@ -6,8 +6,12 @@
 
 <h4><%= @reservation.listing.title %></h4>
 
-<h4>Total:
-	<%= @reservation.total_price %>
-</h4>
-
 <h5>Special request: <%= @reservation.special_request %></h5>
+
+<h4>Total: $<%= @reservation.total_price %></h4>
+	
+<h5>To secure your booking, please proceed to make <%= link_to "Payment", new_braintree_path(@reservation) %>.</h5>
+
+
+
+

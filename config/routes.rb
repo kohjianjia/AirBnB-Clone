@@ -40,10 +40,10 @@ Rails.application.routes.draw do
 	# get "/listing/:id" => "listing#show"
 	# get "/listing/:id/edit" => "listing#show#edit"
 
-  #reservation
-  # resources :reservations, only: [:index]
-
 	patch "/listings/:id/verify" => "listings#verify", as: "verify"
+
+  get 'reservations/:id/braintree/new' => 'braintree#new', as: "new_braintree"
+  post 'reservations/:id/braintree/checkout' => 'braintree#checkout', as: "checkout_braintree"
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
