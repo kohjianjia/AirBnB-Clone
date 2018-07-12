@@ -23,6 +23,15 @@ class UsersController < Clearance::UsersController
 
 	def edit
 		@user = User.find(params[:id])
+
+	end
+
+	def update
+		@user = User.find(params[:id])
+		# byebug
+		@user.update(name: params[:user][:name], gender: params[:user][:gender], image: params[:user][:image])
+		flash[:update] = "Profile updated!"
+		redirect_to user_path(@user)
 	end
 
 	private
@@ -53,5 +62,6 @@ class UsersController < Clearance::UsersController
   	  # params will require a user key, and user key will require the 5 keys
       params.require(:user).permit(:email, :password, :name, :gender, :image)
     end
+
 
 end

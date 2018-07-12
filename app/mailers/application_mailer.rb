@@ -1,4 +1,7 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: 'from@example.com'
-  layout 'mailer'
+
+	# email that will be visible when receiptient receives the email
+  	default from: 'notification@airbnbclone.com'
+  	layout 'mailer'
+
 end
