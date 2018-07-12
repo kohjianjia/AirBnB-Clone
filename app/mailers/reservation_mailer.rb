@@ -3,6 +3,7 @@ class ReservationMailer < ApplicationMailer
 
 	default from: 'jjkohtest@gmail.com'
 
+	# booking_email method is being called in reservations_controller.rb
 	def booking_email(customer, host, reservation_id)
 		@customer = customer
 		@host = host
