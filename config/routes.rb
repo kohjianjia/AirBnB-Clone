@@ -44,7 +44,7 @@ Rails.application.routes.draw do
 
   get 'reservations/:id/braintree/new' => 'braintree#new', as: "new_braintree"
   post 'reservations/:id/braintree/checkout' => 'braintree#checkout', as: "checkout_braintree"
-
+  #
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
 
