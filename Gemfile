@@ -89,5 +89,8 @@ gem 'fog-aws'
 # payment
 gem 'braintree'
 
+# jobs
+gem 'sidekiq'
+
 
 

@@ -29,7 +29,7 @@ Rails.application.routes.draw do
 
 	# homepage
 	get "/homepage" => "homepage#index"
-
+  #
 	# nested routes
 	resources :listings do
     resources :reservations

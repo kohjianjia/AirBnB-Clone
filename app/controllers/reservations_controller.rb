@@ -9,9 +9,7 @@ class ReservationsController < ApplicationController
 		# byebug
 		# respond_to do |format|
 			if @reservation.save
-		        # Tell the UserMailer to send a welcome email after save
-		        	# deliver_later means if mailing server is down, any command below this will still proceed, but not deliver_now
-		        ReservationMailer.booking_email(@reservation.user, @listing, @reservation.id).deliver_later
+				ReservationJob.perform_later(@reservation.user, @listing, @reservation.id)
 
 		        # format.html { redirect_to(@reservation.user_id, notice: 'Reservation was successfully booked.') }
 		        # format.json { render json: @reservation.user_id, status: :created, location: @reservation.user_id }
