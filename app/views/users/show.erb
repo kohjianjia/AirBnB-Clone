@@ -52,7 +52,7 @@
 		<% i = 1 %>
 		<% @user.reservations.each do |reservation| %>
 			<h5>
-				<%= i.to_s %>. <%= reservation.listing.city %>, from <%= reservation.start_date %> to <%= reservation.end_date %>
+				<%= i.to_s %>. <a href="/listings/<%= reservation.listing.id %>/reservations/<%= reservation.id %>"><%= reservation.listing.city %>, from <%= reservation.start_date %> to <%= reservation.end_date %></a>
 			</h5>
 			<% i += 1 %>
 		<% end %>
