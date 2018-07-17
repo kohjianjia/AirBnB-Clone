@@ -1,6 +1,36 @@
-<div id="clearance" class="sign-in">
-  <h2><%= t(".title") %></h2>
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<style>
+	    body {
+	      background-image: url("http://natbg.com/wp-content/uploads/2017/01/mountains-cold-landscape-winter-maountain-mountain-view-desktop-backgrounds.jpg");
+	    }
+  	</style>
+</head>
+<body>
 
-  <%= render partial: '/sessions/form' %>
+<div class="d-flex flex-column bd-highlight mb-3 text-center" style="display: block; margin-top: 20vh; margin-left: auto; margin-right: auto; width: auto;">
+
+	<div id="clearance" class="sign-in">
+		<div class="p-2 bd-highlight">
+			<h2 style="color: #fff"><%= t(".title") %></h2>
+		</div>
+
+		<div class="p-2 bd-highlight" style="color: #fff;">
+			<%= form_for :session, url: session_path do |form| %>
+
+			<%= render partial: '/sessions/form', object: form %>
+		</div>
+
+		<div class="p-2 bd-highlight submit-field">
+			<%= form.submit style: "background-color: #000; color: #fff; border: none;" %> <%= link_to "Forgot password?", new_password_path, style: "color: #fff; padding-left: 1vw;" %>
+		</div>
+
+		<% end %>
+	</div>
 
 </div>
+
+</body>
+</html>

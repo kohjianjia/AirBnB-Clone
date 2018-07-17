@@ -1,73 +1,99 @@
-<% @listing.images.each do |image| %>
-	<%= image_tag image.thumb.url %>
-	<br/>
-<% end %>
+<div class="container" style="margin-bottom: 7vh">
+
+  <div class="row">
+
+    <div class="col-8 mt-1">
+      <div style="display: table; width: 90%; margin: 20px auto;">
+
+        <% if !@listing.images.blank? %>
+          <% @listing.images.each do |image| %>
+            <%= image_tag image.thumb.url style:"display: table-cell; text-align: center; width: 16%;" %>
+          <% end %>
+        <% else %>
+          <img src="https://images.unsplash.com/photo-1493663284031-b7e3aefcae8e?ixlib=rb-0.3.5&s=6286e40d53d85d1fe9fb0f2fae05c173&auto=format&fit=crop&w=1050&q=80" style="display: table-cell; text-align: center; width: 45vw;">
+          <br/>
+        <% end %>
+      </div>
+
+      <h1>
+        <%= @listing.title %> 
+        <a style="margin-left: 1vw;" href="<%= @listing.id %>/edit" class="btn btn-outline-secondary" role="button" aria-pressed="true">Edit Listing</a>
+      </h1>
+
+      <h3>in <a href=""><%= @listing.city %></a></h3>
+
+      <div style="margin-top: 2vh;">
+        Listing Status: <%= @listing.verification %>
+      </div>
+
+      <% if current_user.superadmin? || current_user.moderator? %>
+      	<% if !@listing.verification %>
+      		<%= link_to 'verify this listing', verify_path(@listing), method: :patch %>
+      	<% else %>
+      		<%= link_to 'unverify', verify_path(@listing), method: :patch %>
+      	<% end %>
+      <% end %>
+
+      <h4 style="margin-top: 2vh;">Owner: <a href="/users/<%= @listing.user.id %>"><%= @listing.user.name %></a></h4>
+
+      <h3 style="margin-top: 2vh;">Summary: <%= @listing.summary %></h3>
+
+      <h4 style="margin-top: 2vh;"><%= @listing.guest_number %> guests | <%= @listing.home_type %> | <%= @listing.room_type %></h4>
+
+      <h4 style="margin-top: 2vh;">Description: <%= @listing.description %></h4>
+
+      <h4 style="margin-top: 2vh;">Amenities: </h4>
+    	<% @listing.amenity.each do |a| %>
+    		<li><%= a %></li>
+    	<% end %>
+    </div>
+
+    <div class="col-4">
+      <h3 class="mt-4">$<%= @listing.pricing %> per night </h3>
+
+      <h3 style="margin-top: 2vh;">Dates</h3>
+
+      <%= form_with scope: :reservation, url: listing_reservations_path(@listing), local: true do |form| %>
+
+        <div style="margin-top: 2vh;">
+          <%= form.label :check_in %><br>
+          <%= form.text_field :start_date, id: "datepicker1", width: 276 %>
+        </p>
+
+        <div>
+          <%= form.label :check_out %><br>
+          <%= form.text_field :end_date, id: "datepicker2", width: 276  %>
+        </div>
+
+        <div style="margin-top: 2.5vh;">
+          <%= form.label :special_request %><br>
+          <%= form.text_field :special_request %>
+        </div>
+
+        <div style="margin-top: 3vh;">
+          <%= form.submit class: "btn btn-outline-dark" %>
+        </div>
+
+      <% end %>
+    </div>
+
+  </div>
+
+</div>
 
 
-<h1><%= @listing.title %></h1>
 
-<h3>in <a href=""><%= @listing.city %></a></h3>
+    <script>
+      $('#datepicker1').datepicker({
+      	format: 'dd/mm/yyyy',
+          uiLibrary: 'bootstrap4'
+      });
 
-Listing Status: <%= @listing.verification %><br/>
+      $('#datepicker2').datepicker({
+      	format: 'dd/mm/yyyy',
+          uiLibrary: 'bootstrap4'
+      });
+    </script>
 
-<% if current_user.superadmin? || current_user.moderator? %>
-	<% if !@listing.verification %>
-		<%= link_to 'verify this listing', verify_path(@listing), method: :patch %>
-	<% else %>
-		<%= link_to 'unverify', verify_path(@listing), method: :patch %>
-	<% end %>
-<% end %>
 
-<h4>Owner: <a href="/users/<%= @listing.user.id %>"><%= @listing.user.name %></a></h4>
-
-<h3>Summary: <%= @listing.summary %></h3>
-
-<h4><%= @listing.guest_number %> guests | <%= @listing.home_type %> | <%= @listing.room_type %></h4>
-
-<h4>Description: <%= @listing.description %></h4>
-
-<h4>Amenities: </h4>
-	<% @listing.amenity.each do |a| %>
-		<li><%= a %></li>
-	<% end %>
-<hr/>
-
-<h3>$<%= @listing.pricing %> per night </h3>
-
-<h3>Dates</h3>
-
-<%= form_with scope: :reservation, url: listing_reservations_path(@listing), local: true do |form| %>
-
-  <p>
-    <%= form.label :check_in %><br>
-    <%= form.text_field :start_date, id: "datepicker1", width: 276 %>
-  </p>
-
-  <p>
-    <%= form.label :check_out %><br>
-    <%= form.text_field :end_date, id: "datepicker2", width: 276  %>
-  </p>
-
-  <p>
-    <%= form.label :special_request %><br>
-    <%= form.text_field :special_request %>
-  </p>
-
-  <p>
-    <%= form.submit %>
-  </p>
-
-<% end %>
-
-<script>
-  $('#datepicker1').datepicker({
-  	format: 'dd/mm/yyyy',
-      uiLibrary: 'bootstrap4'
-  });
-
-  $('#datepicker2').datepicker({
-  	format: 'dd/mm/yyyy',
-      uiLibrary: 'bootstrap4'
-  });
-</script>
 

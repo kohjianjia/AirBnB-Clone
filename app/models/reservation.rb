@@ -28,24 +28,26 @@ class Reservation < ApplicationRecord
 
 	# Check if a given reservation overlaps this interval
 	def overlapping_reservations
-		# byebug
 		# =? prevents sql injection
-		Reservation.where("listing_id =?", self.listing_id).each do |r|
-			if overlaps?(r)
-				return errors.add(:unavailable, "dates!")
+		reservations = Reservation.where("listing_id =?", self.listing_id)
+
+		if reservations.count > 0
+			reservations.each do |r|
+				if overlaps?(r)
+					return errors.add(:unavailable, "dates!")
+				end
 			end
 		end
 	end
 
 	def calculate_total_price
-		# byebug
 		self.total_price = self.listing.pricing * (self.end_date - self.start_date).to_i
 	end
 
 	private	
 	# Check if a given reservation overlaps this reservation    
 	def overlaps?(other)
-		self.start_date <= other.end_date && other.start_date <= self.end_date
+		self.start_date < other.end_date && other.start_date < self.end_date
 	end
 
 end

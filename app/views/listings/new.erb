@@ -1,116 +1,128 @@
-<h2>Add listing</h2>
+<div class="container" style="margin-bottom: 7vh">
 
-<%= form_with scope: @listing, url: listings_path, local: true do |form| %>
-  <p>
-    <%= form.label :title %><br>
-    <%= form.text_field :title %>
-  </p>
+  <div class="d-flex flex-column bd-highlight mb-3">
 
-  <p>
-    <%= form.label :city %><br>
-    <%= form.text_field :city %>
-  </p>
+    <h2 class="p-2 bd-highlight">Add listing</h2>
 
-  <p>
-    <%= form.label :address %><br>
-    <%= form.text_field :address %>
-  </p>
+    <%= form_with scope: @listing, url: listings_path, local: true do |form| %>
 
-  <p>
-    <%= form.label :summary %><br>
-    <%= form.text_area :summary %>
-  </p>
+      <div class="p-2 bd-highlight">
+        <%= form.label :title %><br>
+        <%= form.text_field :title %>
+      </div>
 
-  <p>
-    <%= form.label :description %><br>
-    <%= form.text_area :description %>
-  </p>
+      <div class="p-2 bd-highlight" style="margin-top: 1.5vh;">
+        <%= form.label :city %><br>
+        <%= form.text_field :city %>
+      </div>
 
-  <p>
-    <%= form.label :home_type %><br>
-    Apartment
-    <%= form.radio_button :home_type, "Apartment" %>
-    House
-    <%= form.radio_button :home_type, "House" %>
-    Bed & Breakfast
-    <%= form.radio_button :home_type, "Bed and Breakfast" %>
-    Other
-    <%= form.radio_button :home_type, "Other" %>
-  </p>
+      <div class="p-2 bd-highlight" style="margin-top: 1.5vh;">
+        <%= form.label :address %><br>
+        <%= form.text_field :address %>
+      </div>
 
-  <p>
-    <%= form.label :room_type %><br>
-    Entire home/apt
-    <%= form.radio_button :room_type, "Entire place" %>
-    Private room
-    <%= form.radio_button :room_type, "Private room" %>
-    Shared room
-    <%= form.radio_button :room_type, "Shared room" %>
-  </p>
+      <div class="p-2 bd-highlight" style="margin-top: 1.5vh;">
+        <%= form.label :summary %><br>
+        <%= form.text_area :summary %>
+      </div>
 
-  <p>
-    <%= form.label :amenities %><br>
-    Self check-in
-    <%= form.check_box :amenity, {:multiple => true}, "Self check-in", nil %>
-    Pool
-    <%= form.check_box :amenity, {:multiple => true}, "Pool", nil %>
-    Gym
-    <%= form.check_box :amenity, {:multiple => true}, "Gym", nil %>
-    Kitchen
-    <%= form.check_box :amenity, {:multiple => true}, "Kitchen", nil %>
-    Washer
-    <%= form.check_box :amenity, {:multiple => true}, "Washer", nil %>
-    Dryer
-    <%= form.check_box :amenity, {:multiple => true}, "Dryer", nil %>
-    Dishwasher
-    <%= form.check_box :amenity, {:multiple => true}, "Dishwasher", nil %>
-    Elevator
-    <%= form.check_box :amenity, {:multiple => true}, "Elevator", nil %>
-    Buzzer
-    <%= form.check_box :amenity, {:multiple => true}, "Buzzer", nil %>
-    Doorman
-    <%= form.check_box :amenity, {:multiple => true}, "Doorman", nil %>
-    Game console
-    <%= form.check_box :amenity, {:multiple => true}, "Game console", nil %>
-    Pets allowed
-    <%= form.check_box :amenity, {:multiple => true}, "Pets allowed", nil %>
-    Heating
-    <%= form.check_box :amenity, {:multiple => true}, "Heating", nil %>
-    Air conditioning
-    <%= form.check_box :amenity, {:multiple => true}, "Air conditioning", nil %>
-    Wifi
-    <%= form.check_box :amenity, {:multiple => true}, "Wifi", nil %>
-    TV
-    <%= form.check_box :amenity, {:multiple => true}, "TV", nil %>
-    Bathroom essentials
-    <%= form.check_box :amenity, {:multiple => true}, "Bathroom essentials", nil %>
-    Bedroom comforts
-    <%= form.check_box :amenity, {:multiple => true}, "Bedroom comforts", nil %>
-    Coffee maker
-    <%= form.check_box :amenity, {:multiple => true}, "Coffee maker", nil %>
-    Smoke detector
-    <%= form.check_box :amenity, {:multiple => true}, "Smoke detector", nil %>
-    Free parking on premises
-    <%= form.check_box :amenity, {:multiple => true}, "Free parking on premises", nil %>
-  </p>
+      <div class="p-2 bd-highlight" style="margin-top: 1.5vh;">
+        <%= form.label :description %><br>
+        <%= form.text_area :description %>
+      </div>
 
-  <p>
-    <%= form.label :accommodates %><br>
-    <%= form.text_field :guest_number %>
-  </p>
+      <div class="p-2 bd-highlight" style="margin-top: 1.5vh;">
+        <%= form.label :home_type %><br>
+        <%= form.radio_button :home_type, "Apartment" %>
+        Apartment
+        <%= form.radio_button :home_type, "House" %>
+        House
+        <%= form.radio_button :home_type, "Bed and Breakfast" %>
+        Bed & Breakfast
+        <%= form.radio_button :home_type, "Other" %>
+        Other
+      </div>
 
-  <p>
-    <%= form.label :pricing %><br>
-    <%= form.text_field :pricing %>
-  </p>
+      <div class="p-2 bd-highlight" style="margin-top: 1.5vh;">
+        <%= form.label :room_type %><br>
+        <%= form.radio_button :room_type, "Entire place" %>
+        Entire home/apt
+        <%= form.radio_button :room_type, "Private room" %>
+        Private room
+        <%= form.radio_button :room_type, "Shared room" %>
+        Shared room
+      </div>
 
-  <p>
-    <%= form.label :images %><br>
-    <%= form.file_field :images, multiple: true %>
-  </p>
+      <div class="p-2 bd-highlight" style="margin-top: 1.5vh;">
+        <%= form.label :amenities %><br>
+        <%= form.check_box :amenity, {:multiple => true}, "Self check-in", nil %>
+        Self check-in
+        <%= form.check_box :amenity, {:multiple => true}, "Pool", nil %>
+        Pool
+        <%= form.check_box :amenity, {:multiple => true}, "Gym", nil %>
+        Gym
+        <%= form.check_box :amenity, {:multiple => true}, "Kitchen", nil %>
+        Kitchen
+        <%= form.check_box :amenity, {:multiple => true}, "Washer", nil %>
+        Washer
+        <%= form.check_box :amenity, {:multiple => true}, "Dryer", nil %>
+        Dryer
+        <%= form.check_box :amenity, {:multiple => true}, "Dishwasher", nil %>
+        Dishwasher
+        <%= form.check_box :amenity, {:multiple => true}, "Elevator", nil %>
+        Elevator
+        <%= form.check_box :amenity, {:multiple => true}, "Buzzer", nil %>
+        Buzzer
+        <%= form.check_box :amenity, {:multiple => true}, "Doorman", nil %>
+        Doorman
+        <%= form.check_box :amenity, {:multiple => true}, "Game console", nil %>
+        Game console
+        <%= form.check_box :amenity, {:multiple => true}, "Pets allowed", nil %>
+        Pets allowed
+        <%= form.check_box :amenity, {:multiple => true}, "Heating", nil %>
+        Heating
+        <%= form.check_box :amenity, {:multiple => true}, "Air conditioning", nil %>
+        Air conditioning
+        <%= form.check_box :amenity, {:multiple => true}, "Wifi", nil %>
+        Wifi
+        <%= form.check_box :amenity, {:multiple => true}, "TV", nil %>
+        TV
+        <%= form.check_box :amenity, {:multiple => true}, "Bathroom essentials", nil %>
+        Bathroom essentials
+        <%= form.check_box :amenity, {:multiple => true}, "Bedroom comforts", nil %>
+        Bedroom comforts
+        <%= form.check_box :amenity, {:multiple => true}, "Coffee maker", nil %>
+        Coffee maker
+        <%= form.check_box :amenity, {:multiple => true}, "Smoke detector", nil %>
+        Smoke detector
+        <%= form.check_box :amenity, {:multiple => true}, "Free parking on premises", nil %>
+        Free parking on premises
+      </div>
 
-  <p>
-    <%= form.submit %>
-  </p>
-<% end %>
+      <div class="p-2 bd-highlight" style="margin-top: 1.5vh;">
+        <%= form.label :accommodates %><br>
+        <%= form.text_field :guest_number %>
+      </div>
+
+      <div class="p-2 bd-highlight" style="margin-top: 1.5vh;">
+        <%= form.label :pricing %><br>
+        <%= form.text_field :pricing %>
+      </div>
+
+      <div class="p-2 bd-highlight" style="margin-top: 1.5vh;">
+        <%= form.label :images %><br>
+        <%= form.file_field :images, multiple: true %>
+      </div>
+
+      <div class="p-2 bd-highlight" style="margin-top: 1.5vh;">
+        <%= form.submit class: "btn btn-outline-dark" %>
+      </div>
+      
+    <% end %>
+
+  </div>
+
+</div>
+
+
 
