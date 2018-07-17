@@ -22,7 +22,7 @@ Rails.application.routes.draw do
   	# page with sign up form             #new is the method used
   	get "/sign_in" => "clearance/sessions#new", as: "sign_in"
   	delete "/sign_out" => "clearance/sessions#destroy", as: "sign_out"
-  	get "/sign_up" => "clearance/users#new", as: "sign_up"
+  	get "/sign_up" => "users#new", as: "sign_up"
 
 	# user clicked on form -> google, users will get redirected back
 	get "/auth/:provider/callback" => "sessions#create_from_omniauth"
