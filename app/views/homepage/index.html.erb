@@ -1,43 +1,70 @@
-<h1>Explore Airbnb</h1>
+<div class="container" style="margin-bottom: 7vh">
 
-<%= link_to "Add Listing", new_listing_path %> 
+	<div class="mt-2 mb-4">
+		Signed in as: <%= current_user.name %>	
+	</div>
 
-<% if signed_in? %>
-	<% case current_user.role %>
-	<% when 'customer' %>
-		<h3>Welcome</h3>	
-	<% when 'moderator' %>
-		<h3>Welcome, moderator</h3>
-		<h4><%= link_to 'Users:', users_path %> <%= User.count %> registered</h4>
-	<% when 'superadmin' %>
-		<h3>Welcome, Administrator</h3>
-		<h4><%= link_to 'Users:', users_path %> <%= User.count %> registered</h4>
+	<div style="margin-bottom: 4vh ">
+
+		<a href="/listings/new" class="btn btn-outline-dark" role="button" aria-pressed="true">
+			Add Listing
+		</a>
+
+	</div>
+
+	<div style="margin-bottom: 4vh ">
+
+		<% if signed_in? %>
+			<% case current_user.role %>
+			<% when 'customer' %>
+				<h3>Welcome</h3>	
+			<% when 'moderator' %>
+				<h3>Welcome, moderator</h3>
+				<h4><%= link_to 'Users:', users_path %> <%= User.count %> registered</h4>
+			<% when 'superadmin' %>
+				<h3>Welcome, Administrator</h3>
+				<h4><%= link_to 'Users:', users_path %> <%= User.count %> registered</h4>
+			<% end %>
+		<% else %>
+			<h3>Welcome</h3>
+		<% end %>
+
+	</div>
+
+<!-- 	<div style="margin-bottom: 4vh">
+		<h2>Explore Airbnb</h2>
+	</div>  -->
+
+	<div>
+		<h2>Homes around the world</h2>
+	</div>
+
+	<%= page_entries_info @listings %><br/>
+	<%= paginate @listings %><br/>
+
+<div class="row">
+	<% @listings.each do |listing| %>
+		<div class="col-4">
+			<div class="card mb-4">
+				<% if listing.images != [] %>
+					<%= image_tag listing.images[0].thumb.url %><br />
+				<% else %>
+					<img class="card-img-top" src="https://images.unsplash.com/photo-1493663284031-b7e3aefcae8e?ixlib=rb-0.3.5&s=6286e40d53d85d1fe9fb0f2fae05c173&auto=format&fit=crop&w=1050&q=80" alt="Card image cap">
+				<% end %>
+				<div class="card-body">
+					<a href="/listings/<%= listing.id %>" class="card-title"><%= listing.title %></h5></a>
+					<p class="card-text"><%= listing.room_type %> • <%= listing.city %></p>
+				</div>
+			</div>
+		</div>
 	<% end %>
-<% else %>
-	<h3>Welcome</h3>
-<% end %>
-
-<hr />
-
-<div>
-	<h2>Homes around the world</h2>
 </div>
 
-<%= page_entries_info @listings %><br/>
-<%= paginate @listings %><br/>
+	<%= paginate @listings %>
 
-<% @listings.each do |listing| %>
-	<% if listing.images != [] %>
-		<%= image_tag listing.images[0].thumb.url %><br />
-	<% end %>
-	<%= listing.room_type %> • <%= listing.city %><br />
-	<a href="/listings/<%= listing.id %>"><%= listing.title %></a> 
-	<br />
-	$<%= listing.pricing %> per night<br />
-	<br />
-<% end %>
+</div>
 
-<%= paginate @listings %>
+
 
 
 

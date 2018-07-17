@@ -1,3 +1,18 @@
-<!-- to create this: rails g controller Welcome index -->
-<h1>Airbnb</h1>
-<h2>Book unique homes and experiences all over the world.</h2>
+<style>
+	body {
+		background-image: url("http://natbg.com/wp-content/uploads/2017/01/mountains-cold-landscape-winter-maountain-mountain-view-desktop-backgrounds.jpg");
+	}
+</style>
+
+<div style="display: block; margin-top: 30vh; margin-left: auto; margin-right: auto; width: 78%;">
+
+	<h2 class="font-weight-bold" style="font-size: 2.2em; color: #fff">
+		Book unique homes and experiences all over the world.
+	</h2>
+
+	<%= form_with url: search_path, local: true, html: { class: 'form-inline my-2 my-lg-0' } do |f| %>
+		<input name="city_search" class="form-control mr-sm-2" type="search" placeholder="Search a City" aria-label="Search" style="width:60vw;">
+		<button class="btn btn-sm btn-outline-secondary" type="submit">Search</button>
+	<% end %>
+
+</div>

@@ -1,12 +1,10 @@
 class ReservationsController < ApplicationController
 
 	def create
-		# byebug
 		@listing = Listing.find(params[:listing_id])
 		@reservation = Reservation.new(reservation_params)
 		@reservation.listing_id = @listing.id
 		@reservation.user_id = current_user.id
-		# byebug
 		# respond_to do |format|
 			if @reservation.save
 				ReservationJob.perform_later(@reservation.user, @listing, @reservation.id)

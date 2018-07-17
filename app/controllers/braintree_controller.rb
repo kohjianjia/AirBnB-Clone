@@ -20,7 +20,7 @@ class BraintreeController < ApplicationController
 	  if result.success?
 	  	transaction = result.transaction
 	  	flash[:payment_success] = "Transaction successful! Your transaction ref: #{transaction}"
-	    redirect_to homepage_index_path
+	    redirect_to homepage_path
 	  else
 		result.errors.each do |error|
 			puts error.attribute

@@ -1,16 +1,20 @@
-<h4>Your upcoming trip!</h4>
+<div class="container" style="margin-bottom: 7vh">
 
-<h3><%= @reservation.listing.city %></h3>
+	<h4>Your upcoming trip!</h4>
 
-<h5><%= @reservation.start_date %> to <%= @reservation.end_date %> • <%= @reservation.listing.guest_number %> guests</h5>
+	<h3><%= @reservation.listing.city %></h3>
 
-<h4><%= @reservation.listing.title %></h4>
+	<h5><%= @reservation.start_date %> to <%= @reservation.end_date %> • <%= @reservation.listing.guest_number %> guests</h5>
 
-<h5>Special request: <%= @reservation.special_request %></h5>
+	<h4><%= @reservation.listing.title %></h4>
 
-<h4>Total: $<%= @reservation.total_price %></h4>
-	
-<h5>To secure your booking, please proceed to make <%= link_to "Payment", new_braintree_path(@reservation) %>.</h5>
+	<h5>Special request: <%= @reservation.special_request %></h5>
+
+	<h4>Total: $<%= @reservation.total_price %></h4>
+		
+	<h5>To secure your booking, please proceed to make <%= link_to "Payment", new_braintree_path(@reservation) %>.</h5>
+
+</div>
 
 
 

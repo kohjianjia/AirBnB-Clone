@@ -1,29 +1,17 @@
-<!-- _ means its a partial -->
-
 <div class="text-field">
-  <%= form.label :email %>
+  <%= form.label :email, class: "font-weight-bold" %>
+  <!-- _ means its a partial -->
   <%= form.text_field :email, type: 'email' %>
 </div>
 
 <div class="password-field">
-  <%= form.label :password %>
+  <%= form.label :password, class: "font-weight-bold" %>
   <%= form.password_field :password %>
 </div>
 
 <div class="text-field">
-  <%= form.label :name %>
+  <%= form.label :name, class: "font-weight-bold" %>
   <%= form.text_field :name, type: 'name' %>
-</div>
-
-<div>
-  <%= form.label :gender %><br />
-  <%= form.radio_button :gender, "male" %> Male
-  <%= form.radio_button :gender, "female" %> Female
-  <%= form.radio_button :gender, "other" %> Other
-</div>
-
-<div>
-  <%= form.file_field :image %>
 </div>
 
 
