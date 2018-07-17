@@ -13,7 +13,6 @@ class User < ApplicationRecord
 
 	# auth_hash returns requested info in a hash
 	def self.create_with_auth_and_hash(authentication, auth_hash)
-		# byebug
 	   user = self.create!(
 	   	# these info are required from a hash from google
 	    name: auth_hash["info"]["name"],

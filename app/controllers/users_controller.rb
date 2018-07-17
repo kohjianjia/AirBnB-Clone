@@ -11,7 +11,6 @@ class UsersController < Clearance::UsersController
 
 	def create
 		user = User.new(user_params)
-		# byebug
 		user.save
 		redirect_to sign_in_path
 	end
@@ -28,7 +27,6 @@ class UsersController < Clearance::UsersController
 
 	def update
 		@user = User.find(params[:id])
-		# byebug
 		@user.update(name: params[:user][:name], gender: params[:user][:gender], image: params[:user][:image])
 		flash[:update] = "Profile updated!"
 		redirect_to user_path(@user)
@@ -60,7 +58,7 @@ class UsersController < Clearance::UsersController
 
 	def user_params
   	  # params will require a user key, and user key will require the 5 keys
-      params.require(:user).permit(:email, :password, :name, :gender, :image)
+      params.require(:user).permit(:email, :password, :name)
     end
 
 

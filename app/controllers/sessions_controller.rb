@@ -5,7 +5,7 @@ class SessionsController < Clearance::SessionsController
 
 	    sign_in(@user) do |status|
 	      if status.success?
-	        redirect_to homepage_index_path
+	        redirect_to homepage_path
 	      else
 	        flash.now.notice = status.failure_message
 	        render template: "sessions/new", status: :unauthorized
@@ -18,7 +18,6 @@ class SessionsController < Clearance::SessionsController
 
 	  #                signed in before user (same provider and uid), this is ran                       or if new user, then this is ran
 	  authentication = Authentication.find_by_provider_and_uid(auth_hash["provider"], auth_hash["uid"]) || Authentication.create_with_omniauth(auth_hash)
-	  # byebug
 	  # if: previously already logged in with OAuth
 	  if authentication.user
 	    user = authentication.user

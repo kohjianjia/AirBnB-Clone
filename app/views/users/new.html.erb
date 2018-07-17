@@ -1,22 +1,43 @@
 <!-- sign up page -->
 
+<!DOCTYPE html>
+<html>
+<head>
+
+  <title></title>
+
+  <style>
+    body {
+      background-image: url("http://natbg.com/wp-content/uploads/2017/01/mountains-cold-landscape-winter-maountain-mountain-view-desktop-backgrounds.jpg");
+    }
+  </style>
+
+</head>
+
+<body>
+  <div class="d-flex flex-column bd-highlight mb-3 text-center" style="display: block; margin-top: 20vh; margin-left: auto; margin-right: auto; width: auto;">
+
 <div id="clearance" class="sign-up">
-  <h2><%= t(".title") %></h2>
+  <div class="p-2 bd-highlight">
+    <h2 style="color: #fff"><%= t(".title") %></h2>
+  </div>
 
-  <%= form_for @user do |form| %>
+  <div class="p-2 bd-highlight" style="color: #fff">
+    <%= form_for @user do |form| %>
     <!-- _ means its a partial -->
-      <!-- so this file connects with _form.html.erb -->
+    <!-- so this file connects with _form.html.erb -->
     <%= render partial: '/users/form', object: form %>
+  </div>
 
-    <div class="submit-field">
-      <%= form.submit %>
+    <div class="p-2 bd-highlight submit-field">
+      <%= form.submit style: "background-color: #000; color: #fff; border: none;"%>
       <!-- or -->
       <!-- form.submit "some words that you wish to change to" -->
     </div>
 
-    <div class="other-links">
-      <!-- t(".something") enables words to be published in any characters, including Chinese characters -->
-      <%= link_to t(".sign_in"), sign_in_path %>
-    </div>
   <% end %>
 </div>
+
+  </div>
+</body>
+</html>

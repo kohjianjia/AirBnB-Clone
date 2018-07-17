@@ -2,7 +2,7 @@
 <html>
 <head>
   
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
   
   <link href="https://cdn.jsdelivr.net/npm/gijgo@1.9.6/css/gijgo.min.css" rel="stylesheet" type="text/css" />
   
@@ -17,19 +17,108 @@
   <%= stylesheet_link_tag 'application' %>
   <%= javascript_include_tag 'application' %>
   <%= csrf_meta_tag %>
+
 </head>
 <body>
-  <div id="header">
-    <% if signed_in? -%>
-      <%= link_to "Airbnb", homepage_index_path %> | <%= link_to "My Profile", user_path(current_user.id) %>
-      <%= button_to t(".sign_out"), sign_out_path, method: :delete %> <br/>
-      Signed in as: <%= current_user.email %>
-    <% else -%>
-      <%= link_to t(".sign_up"), sign_up_path %>
-      <%= link_to t(".sign_in"), sign_in_path %>
-      <%= link_to "Sign in with Google", "/auth/google_oauth2" %>
-    <% end -%>
-  </div>
+
+<!-- Navbar top -->
+
+      <% if signed_in? %>
+        <nav class="navbar sticky-top navbar-expand-lg navbar-light" style="background-color: #fff; padding:1.5%">
+        <div class="container">
+          <!-- logo -->
+          <a class="airbnb" href="/homepage">
+            <img src="https://cdn2.iconfinder.com/data/icons/rental-icon/240/airbnb-512.png" style="width:31.5px; height:31.5px; margin-right:0.5vw;" alt="">
+          </a>
+
+          <!-- search bar -->
+          <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle mr-1" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              What are you looking for?
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+
+            <%= form_with url: search_path, local: true, html: { class: 'form-inline my-2 my-lg-0' } do |f| %>
+              <input name="city_search" class="form-control mr-sm-2 dropdown-item" type="search" placeholder="City, eg. Selangor" aria-label="Search" style="width:45vw;" id="city_search" list="city_list">
+              <datalist id="city_list"></datalist>
+
+              <input name="title_search" class="form-control mr-sm-2 dropdown-item" type="search" placeholder="Title" aria-label="Search" style="width:45vw;" id="title_search" list="title_list">
+              <datalist id="title_list"></datalist>
+          </div>
+        </div>
+
+          <button class="btn btn-sm btn-outline-secondary" type="submit">Search</button>
+
+        <% end %>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <!-- Put something here if needed -->
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+  <!--           <li class="nav-item">
+              <p class="nav-link mb-0">Signed in as: <%= current_user.email %></p>
+            </li> -->
+            <li class="nav-item">
+              <%= link_to 'Profile', user_path(current_user), class: "nav-link" %>
+            </li>
+            <li class="nav-item">
+              <%= link_to 'Log Out', sign_out_path, method: :delete, class: "nav-link" %>
+            </li>
+
+          <% else %>
+            <nav class="navbar sticky-top navbar-expand-lg navbar-dark" style="background-color: #66000; padding:1.5%">
+            <div class="container">
+            <!-- <a class="navbar-brand" href="#">Airbnb</a> -->
+              <!-- logo -->
+            <a class="airbnb" href="/">
+              <img src="https://assets-cdn.github.com/images/modules/logos_page/Octocat.png" style="width:39px; height:35px; margin-right:1vw;" alt="">
+            </a>
+
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+      
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <!-- Put something here if needed -->
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <% if request.path_info == '/sign_up' %>
+              <li class="nav-item active">
+                <%= link_to 'Log In', sign_in_path, class: 'nav-link' %>
+              </li>
+              <li class="nav-item active">
+                <%= link_to 'Log in with Google', "/auth/google_oauth2", class: 'nav-link' %>
+              </li>
+            <% elsif request.path_info == '/sign_in' %>
+              <li class="nav-item active">
+                <%= link_to 'Sign Up', sign_up_path, class: 'nav-link' %>
+              </li>
+              <li class="nav-item active">
+                <%= link_to 'Log in with Google', "/auth/google_oauth2", :class => 'nav-link' %>
+              </li>
+            <% else %>
+              <li class="nav-item active">
+                <%= link_to 'Sign Up', sign_up_path, class: 'nav-link' %>
+              </li>
+              <li class="nav-item active">
+                <%= link_to 'Log In', sign_in_path, class: 'nav-link' %>
+              </li>
+              <li class="nav-item active">
+                <%= link_to 'Log in with Google', "/auth/google_oauth2", class: 'nav-link' %>
+              </li>
+            <% end %>
+          <% end %>
+          </ul>
+        </div>
+    </div>
+  </nav>
+  <!-- /Navbar top -->
 
   <!-- flash will show on top of each page, unless this is removed (then self specification is required) -->
   <div id="flash">
@@ -37,6 +126,54 @@
       <div class="alert alert-info" id="flash_<%= key %>"><%=h value %></div>
     <% end %>
   </div>
+
+    <!-- Navbar bottom -->
+  <nav class="navbar fixed-bottom navbar-light" style="background-color: #66000">
+    <div class="container">
+
+    <span class="navbar-text">
+    </span>
+
+      <div>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent2" aria-controls="navbarSupportedContent2" aria-expanded="false" aria-label="Toggle navigation" style="border: none; background-color: #fff; padding-bottom: 5px;">
+          <span class="font-weight-normal" style="color: #666; font-size: 15px;">Terms, Privacy & More</span>
+        </button>
+      </div>
+    
+      <div class="collapse navbar-collapse" id="navbarSupportedContent2" style="background-color: #fff">
+        <ul class="navbar-nav mr-auto">
+          <!-- Put something here if needed -->
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <!-- Airbnb -->
+          <div class="navbar-brand">
+            Airbnb
+          </div>
+
+          <li class="nav-item">
+            <a class="nav-link" href="#">Terms</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="#">Privacy</a>
+          </li>
+
+          <li class="nav-item" >
+            <a class="nav-link" href="#">Site Map</a>
+          </li>
+ 
+        </ul>
+
+        <div class='alert alert-error'>
+          <button type="button" class="close" aria-label="Close" data-toggle="collapse" data-target="#navbarSupportedContent2">
+          <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <!-- /Navbar bottom -->
+
   <%= yield %>
   
 </body>

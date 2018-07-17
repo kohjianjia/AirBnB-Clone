@@ -1,0 +1,119 @@
+<div class="container" style="margin-bottom: 7vh">
+
+	<%= @listing.inspect %>
+
+	<h3><%= @listing.title %></h3>
+
+	<hr/>
+
+	<h4>Available edit fields:</h4>
+
+	<%= form_with scope: @listing, url: listing_path, method: "patch", local: true do |form| %>
+
+		<div>
+			<%= form.label :title %><br>
+			<%= form.text_field :title %>
+		</div>
+
+		<div>
+			<%= form.label :summary %><br>
+			<%= form.text_area :summary %>
+		</div>
+
+		<div>
+			<%= form.label :description %><br>
+			<%= form.text_area :description %>
+		</div>
+
+		<div>
+			<%= form.label :home_type %><br>
+			<%= form.radio_button :home_type, "Apartment" %>
+			Apartment
+			<%= form.radio_button :home_type, "House" %>
+			House
+			<%= form.radio_button :home_type, "Bed and Breakfast" %>
+			Bed & Breakfast
+			<%= form.radio_button :home_type, "Other" %>
+			Other
+		</div>
+
+		<div>
+			<%= form.label :room_type %><br>
+			<%= form.radio_button :room_type, "Entire place" %>
+			Entire home/apt
+			<%= form.radio_button :room_type, "Private room" %>
+			Private room
+			<%= form.radio_button :room_type, "Shared room" %>
+			Shared room
+		</div>
+
+		<div>
+			<%= form.label :amenities %><br>
+			<%= form.check_box :amenity, {:multiple => true}, "Self check-in", nil %>
+			Self check-in
+			<%= form.check_box :amenity, {:multiple => true}, "Pool", nil %>
+			Pool
+			<%= form.check_box :amenity, {:multiple => true}, "Gym", nil %>
+			Gym
+			<%= form.check_box :amenity, {:multiple => true}, "Kitchen", nil %>
+			Kitchen
+			<%= form.check_box :amenity, {:multiple => true}, "Washer", nil %>
+			Washer
+			<%= form.check_box :amenity, {:multiple => true}, "Dryer", nil %>
+			Dryer
+			<%= form.check_box :amenity, {:multiple => true}, "Dishwasher", nil %>
+			Dishwasher
+			<%= form.check_box :amenity, {:multiple => true}, "Elevator", nil %>
+			Elevator
+			<%= form.check_box :amenity, {:multiple => true}, "Buzzer", nil %>
+			Buzzer
+			<%= form.check_box :amenity, {:multiple => true}, "Doorman", nil %>
+			Doorman
+			<%= form.check_box :amenity, {:multiple => true}, "Game console", nil %>
+			Game console
+			<%= form.check_box :amenity, {:multiple => true}, "Pets allowed", nil %>
+			Pets allowed
+			<%= form.check_box :amenity, {:multiple => true}, "Heating", nil %>
+			Heating
+			<%= form.check_box :amenity, {:multiple => true}, "Air conditioning", nil %>
+			Air conditioning
+			<%= form.check_box :amenity, {:multiple => true}, "Wifi", nil %>
+			Wifi
+			<%= form.check_box :amenity, {:multiple => true}, "TV", nil %>
+			TV
+			<%= form.check_box :amenity, {:multiple => true}, "Bathroom essentials", nil %>
+			Bathroom essentials
+			<%= form.check_box :amenity, {:multiple => true}, "Bedroom comforts", nil %>
+			Bedroom comforts
+			<%= form.check_box :amenity, {:multiple => true}, "Coffee maker", nil %>
+			Coffee maker
+			<%= form.check_box :amenity, {:multiple => true}, "Smoke detector", nil %>
+			Smoke detector
+			<%= form.check_box :amenity, {:multiple => true}, "Free parking on premises", nil %>
+			Free parking on premises
+		</div>
+
+		<div>
+			<%= form.label :accommodates %><br>
+			<%= form.text_field :guest_number %>
+		</div>
+
+		<div>
+			<%= form.label :pricing %><br>
+			<%= form.text_field :pricing %>
+		</div>
+
+		<div>
+			<%= form.label :images %><br>
+			<%= form.file_field :images, multiple: true %>
+		</div>
+
+		<br/>
+
+		<div>
+			<%= form.submit %>
+		</div>
+
+	<% end %>
+	
+</div>

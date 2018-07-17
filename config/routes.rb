@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  get 'listing/index'
+
   get 'homepage/index'
   resources :passwords, controller: "clearance/passwords", only: [:create, :new]
   resource :session, controller: "sessions", only: [:create]
@@ -17,7 +17,7 @@ Rails.application.routes.draw do
   end
 
   	# leads to views => welcome => index
-	root 'welcome#index'
+	  root 'welcome#index'
 
   	# page with sign up form             #new is the method used
   	get "/sign_in" => "clearance/sessions#new", as: "sign_in"
@@ -29,7 +29,7 @@ Rails.application.routes.draw do
 
 	# homepage
 	get "/homepage" => "homepage#index"
-  #
+  
 	# nested routes
 	resources :listings do
     resources :reservations
@@ -41,6 +41,9 @@ Rails.application.routes.draw do
 	# get "/listing/:id/edit" => "listing#show#edit"
 
 	patch "/listings/:id/verify" => "listings#verify", as: "verify"
+
+  post "/listings/match" => "listings#match", as: "match"
+  post "/listings/search" => "listings#search", as: "search"
 
   get 'reservations/:id/braintree/new' => 'braintree#new', as: "new_braintree"
   post 'reservations/:id/braintree/checkout' => 'braintree#checkout', as: "checkout_braintree"

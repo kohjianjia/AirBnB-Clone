@@ -1,62 +1,64 @@
-<% if signed_in? %>
-	<% case current_user.role %>
-	<% when 'customer' %>
-		<%= image_tag @user.image.thumb.url.to_s %>
+<div class="container" style="margin-bottom: 7vh">
+
+	<% if signed_in? %>
+		<% case current_user.role %>
+		<% when 'customer' %>
+			<%= image_tag @user.image.thumb.url.to_s %>
+			<h3>Name: <%= @user.name %></h3>
+			<hr/>
+			<h3>Listings of <%= @user.name %></h3>
+			<% i = 1 %>
+			<% @user.listings.order("created_at DESC").each do |listing| %>
+				<h4>
+					<%= i.to_s %>. 
+					<a href="/listings/<%= listing.id %>"><%= listing.title %></a>
+				</h4>
+				<% i += 1 %>
+			<% end %>
+		<% when 'moderator' %>
+			<h3>User ID: <%= @user.id %></h3>
+			<%= image_tag @user.image.thumb.url.to_s %>
+			<h3>Name: <%= @user.name %></h3>
+			<h3>Status: <%= @user.role %></h3>
+			<hr/>
+			<h3>Listings of <%= @user.name %></h3>
+			<% i = 1 %>
+			<% @user.listings.order("created_at DESC").each do |listing| %>
+				<h4>
+					<%= i.to_s %>. 
+					<a href="/listings/<%= listing.id %>"><%= listing.title %></a>
+				</h4>
+				<% i += 1 %>
+			<% end %>
+		<% when 'superadmin' %>
+			<h3>User ID: <%= @user.id %></h3>
+			<%= image_tag @user.image.thumb.url.to_s %>
+			<h3>Name: <%= @user.name %></h3>
+			<h3>Status: <%= @user.role %></h3>
+			<h4><%= @user.inspect %></h4>
+			<a style="margin-left: 1vw;" href="/users/<%= @user.id %>/edit" class="btn btn-outline-secondary" role="button" aria-pressed="true">Edit Profile</a>
+			<hr/>
+			<h3>Listings of <%= @user.name %></h3>
+			<% i = 1 %>
+			<% @user.listings.order("created_at DESC").each do |listing| %>
+				<h5>
+					<%= i.to_s %>. 
+					<a href="/listings/<%= listing.id %>"><%= listing.title %></a>
+				</h5>
+				<% i += 1 %>
+			<% end %>
+			<hr/>
+			<h3>Reservations of <%= @user.name %></h3>
+			<% i = 1 %>
+			<% @user.reservations.each do |reservation| %>
+				<h5>
+					<%= i.to_s %>. <a href="/listings/<%= reservation.listing.id %>/reservations/<%= reservation.id %>"><%= reservation.listing.city %>, from <%= reservation.start_date %> to <%= reservation.end_date %></a>
+				</h5>
+				<% i += 1 %>
+			<% end %>
+		<% end %>
+	<% else %>
 		<h3>Name: <%= @user.name %></h3>
-		<hr/>
-		<h3>Listings of <%= @user.name %></h3>
-		<% i = 1 %>
-		<% @user.listings.each do |listing| %>
-			<h4>
-				<%= i.to_s %>. 
-				<a href="/listings/<%= listing.id %>"><%= listing.title %></a>
-			</h4>
-			<% i += 1 %>
-		<% end %>
-	<% when 'moderator' %>
-		<h3>User ID: <%= @user.id %></h3>
-		<%= image_tag @user.image.thumb.url.to_s %>
-		<h3>Name: <%= @user.name %></h3>
-		<h3>Status: <%= @user.role %></h3>
-		<hr/>
-		<h3>Listings of <%= @user.name %></h3>
-		<% i = 1 %>
-		<% @user.listings.each do |listing| %>
-			<h4>
-				<%= i.to_s %>. 
-				<a href="/listings/<%= listing.id %>"><%= listing.title %></a>
-				<button>Verify</button>
-			</h4>
-			<% i += 1 %>
-		<% end %>
-	<% when 'superadmin' %>
-		<h3>User ID: <%= @user.id %></h3>
-		<%= image_tag @user.image.thumb.url.to_s %>
-		<h3>Name: <%= @user.name %></h3>
-		<h3>Status: <%= @user.role %></h3>
-		<h4><%= @user.inspect %></h4>
-		<a href="/users/<%= @user.id %>/edit">EDIT</a>
-		<hr/>
-		<h3>Listings of <%= @user.name %></h3>
-		<% i = 1 %>
-		<% @user.listings.each do |listing| %>
-			<h5>
-				<%= i.to_s %>. 
-				<a href="/listings/<%= listing.id %>"><%= listing.title %></a>
-				<button>Verify</button>
-			</h5>
-			<% i += 1 %>
-		<% end %>
-		<hr/>
-		<h3>Reservations of <%= @user.name %></h3>
-		<% i = 1 %>
-		<% @user.reservations.each do |reservation| %>
-			<h5>
-				<%= i.to_s %>. <a href="/listings/<%= reservation.listing.id %>/reservations/<%= reservation.id %>"><%= reservation.listing.city %>, from <%= reservation.start_date %> to <%= reservation.end_date %></a>
-			</h5>
-			<% i += 1 %>
-		<% end %>
 	<% end %>
-<% else %>
-	<h3>Name: <%= @user.name %></h3>
-<% end %>
+
+</div>

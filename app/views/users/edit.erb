@@ -1,32 +1,40 @@
-<h3>User ID: <%= @user.id %></h3>
-<h3>Name: <%= @user.name %></h3>
+<div class="container" style="margin-bottom: 7vh">
 
-<%= form_with scope: @user, url: user_path, method: "patch", local: true do |form| %>
+	<h3>User ID: <%= @user.id %></h3>
+	<h3>Name: <%= @user.name %></h3>
 
-	<div class="text-field">
-		<%= form.label :name %>
-		<%= form.text_field :name, type: 'name' %>
-	</div>
+	<hr/>
+
+	<h4>Available edit fields:</h4>
+
+	<%= form_with scope: @user, url: user_path, method: "patch", local: true do |form| %>
+
+		<div class="text-field">
+			<%= form.label :name %><br />
+			<%= form.text_field :name, type: 'name' %>
+		</div>
 
 
-	<div>
-		<%= form.label :gender %><br />
-		<%= form.radio_button :gender, "male" %> Male
-		<%= form.radio_button :gender, "female" %> Female
-		<%= form.radio_button :gender, "other" %> Other
-	</div>
+		<div>
+			<%= form.label :gender %><br />
+			<%= form.radio_button :gender, "male" %> Male
+			<%= form.radio_button :gender, "female" %> Female
+			<%= form.radio_button :gender, "other" %> Other
+		</div>
 
-	<div>
-		<%= form.file_field :image %>
-	</div>
+		<div>
+			<%= form.file_field :image %>
+		</div>
 
-	<div class="submit-field">
-		<%= form.submit %>
-		<!-- or -->
-		<!-- form.submit "some words that you wish to change to" -->
-	</div>
+		<div class="submit-field">
+			<%= form.submit %>
+			<!-- or -->
+			<!-- form.submit "some words that you wish to change to" -->
+		</div>
 
-<% end %>
+	<% end %>
+
+</div>
 
 
 

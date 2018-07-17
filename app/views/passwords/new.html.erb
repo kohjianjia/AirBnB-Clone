@@ -1,16 +1,36 @@
-<div id="clearance" class="password-reset">
-  <h2><%= t(".title") %></h2>
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+    <style>
+      body {
+        background-image: url("http://natbg.com/wp-content/uploads/2017/01/mountains-cold-landscape-winter-maountain-mountain-view-desktop-backgrounds.jpg");
+      }
+    </style>
+</head>
+<body>
 
-  <p><%= t(".description") %></p>
+  <div class="d-flex flex-column bd-highlight mb-3 text-center" style="display: block; margin-top: 21vh; margin-left: auto; margin-right: auto; width: auto;">
 
-  <%= form_for :password, url: passwords_path do |form| %>
-    <div class="text-field">
-      <%= form.label :email %>
-      <%= form.text_field :email, type: 'email' %>
+    <div id="clearance" class="password-reset">
+      <div class="p-2 bd-highlight">
+        <h2 style="color: #fff"><%= t(".title") %></h2>
+      </div>
+
+      <p style="color: #fff"><%= t(".description") %></p>
+
+      <%= form_for :password, url: passwords_path do |form| %>
+        <div class="p-2 bd-highlight text-field">
+          <%= form.label :email, style:"color: #fff"%>
+          <%= form.text_field :email, type: 'email' %>
+        </div>
+
+        <div class="p-2 bd-highlight submit-field">
+          <%= form.submit style: "background-color: #000; color: #fff; border: none;" %>
+        </div>
+      <% end %>
     </div>
+  </div>
 
-    <div class="submit-field">
-      <%= form.submit %>
-    </div>
-  <% end %>
-</div>
+</body>
+</html>
