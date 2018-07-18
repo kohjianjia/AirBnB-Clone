@@ -17,7 +17,9 @@
 
       <h1>
         <%= @listing.title %> 
-        <a style="margin-left: 1vw;" href="<%= @listing.id %>/edit" class="btn btn-outline-secondary" role="button" aria-pressed="true">Edit Listing</a>
+        <% if current_user != nil && current_user.id == @listing.user_id %>
+          <a style="margin-left: 1vw;" href="<%= @listing.id %>/edit" class="btn btn-outline-secondary btn-sm" role="button" aria-pressed="true">Edit Listing</a>
+        <% end %>
       </h1>
 
       <h3>in <a href=""><%= @listing.city %></a></h3>
@@ -71,7 +73,11 @@
         </div>
 
         <div style="margin-top: 3vh;">
-          <%= form.submit class: "btn btn-outline-dark" %>
+          <% if current_user != nil && current_user.id == @listing.user_id %>
+            <button type="button" class="btn btn-outline-dark" disabled>Save Reservation</button>
+          <% else %>
+            <%= form.submit class: "btn btn-outline-dark" %>
+          <% end %>
         </div>
 
       <% end %>
@@ -81,19 +87,17 @@
 
 </div>
 
+<script>
+  $('#datepicker1').datepicker({
+  	format: 'dd/mm/yyyy',
+      uiLibrary: 'bootstrap4'
+  });
 
-
-    <script>
-      $('#datepicker1').datepicker({
-      	format: 'dd/mm/yyyy',
-          uiLibrary: 'bootstrap4'
-      });
-
-      $('#datepicker2').datepicker({
-      	format: 'dd/mm/yyyy',
-          uiLibrary: 'bootstrap4'
-      });
-    </script>
+  $('#datepicker2').datepicker({
+  	format: 'dd/mm/yyyy',
+      uiLibrary: 'bootstrap4'
+  });
+</script>
 
 
 
