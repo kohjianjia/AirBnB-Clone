@@ -1,4 +1,4 @@
-` 1qRails.application.configure do
+Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
   # Code is not reloaded between requests.
@@ -92,6 +92,8 @@
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
 
+  config.active_job.queue_adapter = :sidekiq
+
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
   address:              'smtp.gmail.com',
@@ -101,5 +103,5 @@
   password:             ENV['PASSWORD'],
   authentication:       'login',
   enable_starttls_auto: true  }
-  
+
 end
