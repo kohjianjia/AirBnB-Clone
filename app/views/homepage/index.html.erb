@@ -36,7 +36,7 @@
 
 <div class="row">
 	<% @listings.each do |listing| %>
-		<div class="col-4">
+		<div class="col-4" id="<%= listing.id %>"> 
 			<div class="card mb-4">
 				<% if listing.images != [] %>
 					<%= image_tag listing.images[0].thumb.url %><br />
