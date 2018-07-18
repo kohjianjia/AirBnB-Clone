@@ -1,3 +1,3 @@
-redis: redis-server
+web: bundle exec rails server -p $PORT
 
-sidekiq: bundle exec sidekiq -q default -q mailers
+worker: bundle exec sidekiq -q default -q mailers
