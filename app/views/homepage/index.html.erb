@@ -6,14 +6,6 @@
 
 	<div style="margin-bottom: 4vh ">
 
-		<a href="/listings/new" class="btn btn-outline-dark" role="button" aria-pressed="true">
-			Add Listing
-		</a>
-
-	</div>
-
-	<div style="margin-bottom: 4vh ">
-
 		<% if signed_in? %>
 			<% case current_user.role %>
 			<% when 'customer' %>

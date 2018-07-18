@@ -19,29 +19,7 @@
 	// after loading, do the below
 document.addEventListener("DOMContentLoaded", function(event){
 	// when button is released, call backend server
-	$('#title_search').on('keyup', function(e){
-		$.ajax({
-			url: '/listings/match',
-			method: "POST",
-			data: $(this).serialize(),
-			dataType: 'json',
-			success: function(data){
-				console.log(data)
-				var titles = document.getElementById("title_list")
-				titles.innerHTML = ""
-
-				data.forEach(function(listing){
-					
-					var option = document.createElement("option")
-					option.value = listing.title
-					titles.append(option);
-				})
-			}
-		});
-	})
 	$('#city_search').on('keyup', function(e){
-		// when button is released, call backend server
-
 		$.ajax({
 			url: '/listings/match',
 			method: "POST",
@@ -51,12 +29,29 @@ document.addEventListener("DOMContentLoaded", function(event){
 				console.log(data)
 				var cities = document.getElementById("city_list")
 				cities.innerHTML = ""
-
 				data.forEach(function(listing){
-					
 					var option = document.createElement("option")
 					option.value = listing.city
+					// append the cities matched into option
 					cities.append(option);
+				})
+			}
+		});
+	})
+		$('#title_search').on('keyup', function(e){
+		$.ajax({
+			url: '/listings/match',
+			method: "POST",
+			data: $(this).serialize(),
+			dataType: 'json',
+			success: function(data){
+				console.log(data)
+				var titles = document.getElementById("title_list")
+				titles.innerHTML = ""
+				data.forEach(function(listing){
+					var option = document.createElement("option")
+					option.value = listing.title
+					titles.append(option);
 				})
 			}
 		});

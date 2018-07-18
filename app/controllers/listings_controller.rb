@@ -1,10 +1,10 @@
 class ListingsController < ApplicationController
   #             clearance method
-  before_action :require_login, only: [:index, :new, :create]
+  before_action :require_login, only: [:new, :create, :edit, :update, :verify, :destroy]
+  before_action :find_listing, only: [:show, :edit, :verify, :update, :destroy]
   before_action :check_update_rights, only: [:update, :edit]
   before_action :check_verification_rights, only: [:verify]
-
-  before_action :find_listing, only: [:show, :edit, :verify, :update]
+  before_action :ajax_search, only: [:match, :search]
 
   def index
   end
@@ -54,10 +54,6 @@ class ListingsController < ApplicationController
   end
 
   def match
-    @listings = Listing.all
-    @listings = @listings.search_city(params[:city_search]) if params[:city_search].present? 
-    @listings = @listings.search_title(params[:title_search]) if params[:title_search].present?
-
     respond_to do |format|
       format.json { render json: @listings }
       format.html
@@ -65,11 +61,6 @@ class ListingsController < ApplicationController
   end
 
   def search
-    @listings = Listing.all
-    #                                        search is from the form at applicaition.html.erb where name="search"
-    @listings = @listings.search_city(params[:city_search]) if params[:city_search].present? #=> [].city listing_obj.city
-    @listings = @listings.search_title(params[:title_search]) if params[:title_search].present?
-
     if params[:city_search].blank? && params[:title_search].blank?
       flash[:no_match] = "Sorry! No match found."
       redirect_back(fallback_location: homepage_path)
@@ -78,6 +69,13 @@ class ListingsController < ApplicationController
     else 
       flash[:no_match] = "Sorry! No match found."
       redirect_back(fallback_location: homepage_path)
+    end
+  end
+
+  def destroy
+    @listing.destroy
+    respond_to do |format|
+      format.js
     end
   end
 
@@ -97,7 +95,7 @@ class ListingsController < ApplicationController
 
   def check_update_rights
     @listing = Listing.find(params[:id])
-    if current_user.role != @listing.user_id && !current_user.superadmin?
+    if current_user.role != @listing.user_id && current_user.moderator? 
       redirect_to homepage_path
     end
   end
@@ -107,6 +105,13 @@ class ListingsController < ApplicationController
       # flash[:error] = "Access denied"
       flash[:changed] = "verification edited"
     end
+  end
+
+  def ajax_search
+    @listings = Listing.all
+    #                                        search is from the form at applicaition.html.erb where name="search"
+    @listings = @listings.search_city(params[:city_search]) if params[:city_search].present? #=> [].city listing_obj.city
+    @listings = @listings.search_title(params[:title_search]) if params[:title_search].present?
   end
 
 end
